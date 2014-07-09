@@ -31,7 +31,8 @@ class MessageTest extends \PHPUnit_Framework_TestCase
     "files": [
         "1g76i48k34wqbf6qgp285nw0o"
     ],
-    "body": "<html><body>....</body></html>"
+    "body": "<html><body>....</body></html>",
+    "namespace": "dl93uas9mvl0jg55l7zhqr2x"
 }
 JSON;
 
@@ -42,10 +43,10 @@ JSON;
         /** @todo Docs specify an array for this - can a message have multiple authors? */
         $this->assertInternalType('array', $message->getFrom());
         $this->assertCount(1, $message->getFrom());
-        $this->assertEquals('ben.bitdiddle@gmail.com', $message->getFrom()[0]['email']);
+        $this->assertEquals('ben.bitdiddle@gmail.com', $message->getFrom()[0]->getEmail());
         $this->assertInternalType('array', $message->getTo());
         $this->assertCount(1, $message->getTo());
-        $this->assertEquals('wbrogers@mit.edu', $message->getTo()[0]['email']);
+        $this->assertEquals('wbrogers@mit.edu', $message->getTo()[0]->getEmail());
         $this->assertInternalType('array', $message->getCc());
         $this->assertInternalType('array', $message->getBcc());
         $this->assertInstanceOf('DateTime', $message->getDate());

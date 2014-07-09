@@ -4,5 +4,5 @@ namespace Inbox\Models;
 
 interface Constructable
 {
-    public static function fromObject(array $data);
+    public static function fromObject($data);
 }

@@ -13,15 +13,17 @@ class Message implements Constructable
 
     /** @var string */
     protected $id;
+    /** @var Account */
+    protected $account;
     /** @var string */
     protected $subject;
-    /** @var array List of emails or hashes of name and email */
+    /** @var Address[] */
     protected $from;
-    /** @var array List of emails or hashes of name and email */
+    /** @var Address[] */
     protected $to;
-    /** @var array List of emails or hashes of name and email */
+    /** @var Address[] */
     protected $cc;
-    /** @var array List of emails or hashes of name and email */
+    /** @var Address[] */
     protected $bcc;
     /** @var DateTime */
     protected $date;
@@ -31,32 +33,43 @@ class Message implements Constructable
     protected $files;
     /** @var string */
     protected $body;
+    /** @var boolean */
+    protected $unread;
 
     /**
+     * @param Account $account
      * @param string $id
      */
-    public function __construct($id)
+    public function __construct(Account $account, $id)
     {
         $this->id = $id;
+        $this->account = $account;
     }
 
     /**
-     * Construct a Message from a JSON payload
      * @param array $data
      * @return Message
      */
-    public static function fromObject(array $data)
+    public static function fromObject($data)
     {
-        $message = new self($data['id']);
+        $message = new self(new Account($data['namespace']), $data['id']);
         $message->subject = $data['subject'];
-        $message->from = $data['from'];
-        $message->to = $data['to'];
-        $message->cc = $data['cc'];
-        $message->bcc = $data['bcc'];
+        $message->from = array_map(function ($from) {
+            return Address::fromObject($from);
+        }, $data['from']);
+        $message->to = array_map(function ($to) {
+            return Address::fromObject($to);
+        }, $data['to']);
+        $message->cc = array_map(function ($cc) {
+            return Address::fromObject($cc);
+        }, $data['cc']);
+        $message->bcc = array_map(function ($bcc) {
+            return Address::fromObject($bcc);
+        }, $data['bcc']);
         $message->date = new \DateTime('@' . $data['date']);
-        $message->thread = new Thread($data['thread']);
-        $message->files = array_map(function($file) {
-            return new File($file);
+        $message->thread = new Thread($message->getAccount(), $data['thread']);
+        $message->files = array_map(function($file) use ($message) {
+            return new File($message->getAccount(), $file);
         }, $data['files']);
         $message->body = $data['body'];
 
@@ -72,6 +85,14 @@ class Message implements Constructable
     }
 
     /**
+     * @return Account
+     */
+    public function getAccount()
+    {
+        return $this->account;
+    }
+
+    /**
      * @return string
      */
     public function getSubject()
@@ -80,7 +101,7 @@ class Message implements Constructable
     }
 
     /**
-     * @return array
+     * @return Address[]
      */
     public function getFrom()
     {
@@ -88,7 +109,7 @@ class Message implements Constructable
     }
 
     /**
-     * @return array
+     * @return Address[]
      */
     public function getTo()
     {
@@ -96,7 +117,7 @@ class Message implements Constructable
     }
 
     /**
-     * @return array
+     * @return Address[]
      */
     public function getCc()
     {
@@ -104,7 +125,7 @@ class Message implements Constructable
     }
 
     /**
-     * @return array
+     * @return Address[]
      */
     public function getBcc()
     {
@@ -141,5 +162,29 @@ class Message implements Constructable
     public function getBody()
     {
         return $this->body;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isUnread()
+    {
+        return $this->unread;
+    }
+
+    /**
+     * Mark message as unread
+     */
+    public function markUnread()
+    {
+        $this->unread = true;
+    }
+
+    /**
+     * Mark message as read
+     */
+    public function markRead()
+    {
+        $this->unread = false;
     }
 }

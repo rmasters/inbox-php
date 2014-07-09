@@ -30,7 +30,7 @@ class Account implements Constructable
      * @param array $data
      * @return Account
      */
-    public static function fromObject(array $data)
+    public static function fromObject($data)
     {
         $account = new self($data['id']);
         $account->account = $data['account'];
