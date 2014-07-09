@@ -10,4 +10,17 @@
             <directory suffix=".php">src/</directory>
         </whitelist>
     </filter>
+    <logging>
+        <log type="coverage-html" target="build/coverage" charset="utf-8" />
+        <log type="coverage-text" target="php://stdout" showUncoveredFiles="false" />
+    </logging>
+    <php>
+        <!--
+            Currently, these functional tests are useless for anyone except Ross.
+            The intention is to be able to populate an Inbox virtual server with some test data, but that needs work.
+        -->
+        <env name="INBOX_SERVER" value="" />
+        <env name="INBOX_ACCOUNT" value="" />
+        <env name="INBOX_MESSAGE" value="" />
+    </php>
 </phpunit>

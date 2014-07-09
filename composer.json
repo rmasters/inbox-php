@@ -3,8 +3,8 @@
     "description": "PHP wrapper for the Inbox API",
     "license": "MIT",
     "require": {
-        "php": ">=5.3.3",
-        "guzzle/guzzle": ">=3.7.0,<=3.9.9"
+        "php": ">=5.4",
+        "guzzlehttp/guzzle": "~4.0"
     },
     "require-dev": {
         "phpunit/phpunit": "~4"
