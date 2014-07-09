@@ -1,0 +1,19 @@
+language: php
+
+php:
+  - 5.4
+  - 5.5
+  - hhvm
+
+before_script:
+  - composer install --no-interaction --dev
+
+script: php vendor/bin/phpunit --configuration phpunit.xml.dist
+
+after_script:
+  - php vendor/bin/coveralls
+
+matrix:
+  allow_failures:
+    - php: hhvm
+  fast_finish: true

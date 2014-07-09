@@ -2,17 +2,27 @@
     "name": "rmasters/inbox",
     "description": "PHP wrapper for the Inbox API",
     "license": "MIT",
+    "copyright": "Ross Masters 2014",
     "require": {
         "php": ">=5.4",
         "guzzlehttp/guzzle": "~4.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "~4"
+        "phpunit/phpunit": "~4",
+        "satooshi/php-coveralls": "dev-master"
     },
     "autoload": {
         "psr-4": {
             "Inbox\\": "src/",
             "Inbox\\Tests\\": "tests/"
         }
-    }
+    },
+    "authors": [
+        {
+            "name": "Ross Masters",
+            "email": "ross@rossmasters.com",
+            "role": "Developer",
+            "homepage": "http://rossmasters.com/"
+        }
+    ]
 }
