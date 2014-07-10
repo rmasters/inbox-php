@@ -23,12 +23,19 @@ class File implements Constructable
      * @param Account $account
      * @param string $id
      */
-    public function __construct(Account $account, $id)
+    public function __construct(Account $account, $id = null)
     {
-        $this->id = $id;
         $this->account = $account;
+
+        if (!is_null($id)) {
+            $this->id = $id;
+        }
     }
 
+    /**
+     * @param array $data
+     * @return File
+     */
     public static function fromObject($data)
     {
         $file = new File(new Account($data['namespace']), $data['id']);
@@ -37,7 +44,7 @@ class File implements Constructable
         $file->size = $data['size'];
         $file->contentType = $data['content-type'];
         $file->embedded = $data['is_embedded'];
-        
+
         return $file;
     }
 
@@ -55,14 +62,6 @@ class File implements Constructable
     public function getAccount()
     {
         return $this->account;
-    }
-
-    /**
-     * @param Account $account
-     */
-    public function setAccount($account)
-    {
-        $this->account = $account;
     }
 
     /**

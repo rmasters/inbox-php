@@ -44,6 +44,13 @@ class Message implements Constructable
     {
         $this->id = $id;
         $this->account = $account;
+
+        $this->from = [];
+        $this->to = [];
+        $this->cc = [];
+        $this->bcc = [];
+        $this->files = [];
+        $this->unread = true;
     }
 
     /**

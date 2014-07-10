@@ -12,11 +12,13 @@ class Tag implements Constructable
     protected $name;
 
     /**
-     * @param Account|null $account
+     * @param Account $account
      * @param string|null $id
      */
-    public function __construct(Account $account = null, $id = null)
+    public function __construct(Account $account, $id = null)
     {
+        $this->account = $account;
+
         if (!is_null($id)) {
             $this->id = $id;
         }
@@ -48,14 +50,6 @@ class Tag implements Constructable
     public function getAccount()
     {
         return $this->account;
-    }
-
-    /**
-     * @param Account $account
-     */
-    public function setAccount(Account $account)
-    {
-        $this->account = $account;
     }
 
     /**

@@ -13,10 +13,12 @@ class Contact extends Address
      * @param Account|null $account
      * @param string|null $id
      */
-    public function __construct(Account $account, $id)
+    public function __construct(Account $account, $id = null)
     {
         $this->account = $account;
-        $this->id = $id;
+        if (!is_null($id)) {
+            $this->id = $id;
+        }
     }
 
     /**
@@ -46,13 +48,5 @@ class Contact extends Address
     public function getAccount()
     {
         return $this->account;
-    }
-
-    /**
-     * @param Account $account
-     */
-    public function setAccount($account)
-    {
-        $this->account = $account;
     }
 }

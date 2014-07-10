@@ -51,13 +51,13 @@ class Thread implements Constructable
         }, $data['participants']);
         $thread->snippet = $data['snippet'];
         $thread->tags = array_map(function ($tag) use ($thread) {
-            return Tag::fromObject(array_merge($tag, ['account' => $thread->getAccount()->getId()]));
+            return Tag::fromObject(array_merge($tag, ['namespace' => $thread->getAccount()->getId()]));
         }, $data['tags']);
         $thread->messages = array_map(function ($id) use ($thread) {
             return new Message($thread->getAccount(), $id);
         }, $data['messages']);
         $thread->drafts = array_map(function ($id) use ($thread) {
-            return new Draft($id, $thread->getAccount());
+            return new Draft($thread->getAccount(), $id);
         }, $data['drafts']);
 
         return $thread;
@@ -96,7 +96,7 @@ class Thread implements Constructable
     }
 
     /**
-     * @return array
+     * @return Address[]
      */
     public function getParticipants()
     {

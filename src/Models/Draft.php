@@ -9,19 +9,20 @@ use DateTime;
  */
 class Draft extends Message
 {
-    /** @var string */
-    protected $replyToThread;
-
-    public function __construct()
-    {
-    }
-
     /**
      * @param Account $account
+     * @param string|null $id
      */
-    public function setAccount(Account $account)
+    public function __construct(Account $account, $id = null)
     {
         $this->account = $account;
+
+        if (!is_null($id)) {
+            $this->id = $id;
+        }
+
+        /** @todo Is UTC preferable here or date.default_timezone? */
+        $this->date = new \DateTime('now');
     }
 
     /**
@@ -33,33 +34,33 @@ class Draft extends Message
     }
 
     /**
-     * @param array $from List of emails or hashes of name and email
+     * @param Address[] $from List of emails or hashes of name and email
      */
-    public function setFrom($from)
+    public function setFrom(array $from)
     {
         $this->from = $from;
     }
 
     /**
-     * @param array $to List of emails or hashes of name and email
+     * @param Address[] $to List of emails or hashes of name and email
      */
-    public function setTo($to)
+    public function setTo(array $to)
     {
         $this->to = $to;
     }
 
     /**
-     * @param array $cc List of emails or hashes of name and email
+     * @param Address[] $cc List of emails or hashes of name and email
      */
-    public function setCc($cc)
+    public function setCc(array $cc)
     {
         $this->cc = $cc;
     }
 
     /**
-     * @param array $bcc List of emails or hashes of name and email
+     * @param Address[] $bcc List of emails or hashes of name and email
      */
-    public function setBcc($bcc)
+    public function setBcc(array $bcc)
     {
         $this->bcc = $bcc;
     }
@@ -94,13 +95,5 @@ class Draft extends Message
     public function setBody($body)
     {
         $this->body = $body;
-    }
-
-    /**
-     * @param Thread $thread
-     */
-    public function setReplyToThread(Thread $thread)
-    {
-        $this->replyToThread = $thread;
     }
 }

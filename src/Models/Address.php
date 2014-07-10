@@ -10,17 +10,27 @@ class Address implements Constructable
     protected $email;
 
     /**
-     * @param array $data
+     * @param string|null $email
+     * @param string|null $name
+     */
+    public function __construct($email = null, $name = null)
+    {
+        $this->email = $email;
+        $this->name = $name;
+    }
+
+    /**
+     * @param array|string $data
      * @return Address
      */
     public static function fromObject($data)
     {
         $address = new Address();
         if (is_array($data)) {
-            $address->setEmail($data['email']);
-            $address->setName($data['name']);
+            $address->email = $data['email'];
+            $address->name = $data['name'];
         } else {
-            $address->setEmail($data);
+            $address->email = $data;
         }
 
         return $address;
