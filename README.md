@@ -3,7 +3,7 @@
 A PHP wrapper around the [Inbox][inboxapp] API.
 
 [![Build Status](https://img.shields.io/travis/rmasters/inbox-php.svg)](https://travis-ci.org/rmasters/inbox-php)
-[![Coverage Status](https://img.shields.io/coveralls/rmasters/inbox-php.svg)](https://coveralls.io/r/rmasters/inbox)
+[![Coverage Status](https://img.shields.io/coveralls/rmasters/inbox-php.svg)](https://coveralls.io/r/rmasters/inbox-php)
 [![Latest Stable Version](https://img.shields.io/packagist/v/rmasters/inbox.svg)](https://packagist.org/packages/rmasters/inbox)
 [![License](https://img.shields.io/packagist/l/rmasters/inbox.svg)](https://packagist.org/packages/rmasters/inbox)
 
