@@ -37,6 +37,8 @@ class File implements Constructable
         $file->size = $data['size'];
         $file->contentType = $data['content-type'];
         $file->embedded = $data['is_embedded'];
+        
+        return $file;
     }
 
     /**
