@@ -28,18 +28,18 @@ This package is early on in development - expect the API to change a little unti
 
 Take a look over the [API documentation][apidocs] first, to familiarise yourself with the Inbox concepts.
 
-    <?php
+```php
+// Specify a custom server, or use inboxapp.com by default
+$inbox = new Inbox\Inbox('http://127.0.0.1:5555/');
 
-    // Specify a custom server, or use inboxapp.com by default
-    $inbox = new Inbox\Inbox('http://127.0.0.1:5555/');
+// Get namespace (email account) information
+$accountId = 'awa6ltos76vz5hvphkp8k17nt';
+$account = $inbox->account($accountId); // => Account
 
-    // Get namespace (email account) information
-    $accountId = 'awa6ltos76vz5hvphkp8k17nt';
-    $account = $inbox->account($accountId); // => Account
-
-    // Get messages
-    $inbox->messages($account)->all(); // => Message[]
-    $inbox->messages($accountId)->get($messageId); // => Message
+// Get messages
+$inbox->messages($account)->all(); // => Message[]
+$inbox->messages($accountId)->get($messageId); // => Message
+```
 
 ## Orientation
 
