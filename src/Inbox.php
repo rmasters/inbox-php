@@ -57,4 +57,18 @@ class Inbox
 
         return new Endpoints\Messages($this->apiClient, $account);
     }
+
+    /**
+     * Get Thread endpoints
+     * @param Models\Account|string $account Account or account id
+     * @return Endpoints\Messages
+     */
+    public function threads($account)
+    {
+        if (!$account instanceof Models\Account) {
+            $account = new Models\Account($account);
+        }
+
+        return new Endpoints\Threads($this->apiClient, $account);
+    }
 }
